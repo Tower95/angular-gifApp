@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "gifApp"
+  "defaultProject": "gifApp",
+  "cli": {
+    "analytics": false
+  }
 }
