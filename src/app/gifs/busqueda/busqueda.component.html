@@ -1,2 +1,9 @@
 <label for="Seach">Buscar</label>
-<input type="text" [(ngModel)]="busqueda" (keyup)="buscar()"  class="form-control" id="Seach" placeholder="Buscar Gif">
+<input 
+  type="text" 
+  class="form-control" 
+  id="Seach" 
+  placeholder="Buscar Gif"
+  (keyup.enter)="buscar()"
+  #txtBuscar
+>

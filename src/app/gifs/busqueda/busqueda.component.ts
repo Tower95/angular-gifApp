@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -13,8 +13,13 @@ export class BusquedaComponent  {
 
   constructor() { }
 
+  @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
+
   buscar(): void {
-    console.log(this.busqueda);
+
+    console.log(this.txtBuscar.nativeElement.value);
+  
+    this.txtBuscar.nativeElement.value = '';
   }
 
 }
