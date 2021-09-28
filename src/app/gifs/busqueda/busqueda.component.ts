@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { GifsService } from '../services/gifs.service';
+
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
@@ -11,14 +13,21 @@ export class BusquedaComponent  {
 
   public busqueda: String = '';
 
-  constructor() { }
+  constructor(private _gifService: GifsService) { }
 
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
 
   buscar(): void {
 
-    console.log(this.txtBuscar.nativeElement.value);
-  
+    let value: string = this.txtBuscar.nativeElement.value;
+
+    if(value.trim().length === 0) {
+      
+     return;
+
+    } 
+    this._gifService.buscarGif(value);
+    
     this.txtBuscar.nativeElement.value = '';
   }
 
