@@ -14,7 +14,7 @@ export class ResultadosComponent  {
   ) { }
 
   get resultados(){
-    return this.gifsService.reultodos;
+    return this.gifsService.resultodos;
   }
 
 }

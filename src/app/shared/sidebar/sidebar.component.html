@@ -11,6 +11,7 @@
     <a href="#"
      *ngFor="let busqueda of historial;"
       class="list-group-item list-group-item-action"
+      (click)="busquedaHistorial(busqueda)"
     >
     {{ busqueda  |  titlecase  }}
     </a>
