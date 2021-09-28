@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { SearchGIFResponse, Gif } from '../interfaces/gifs.interface';
 
@@ -10,7 +10,6 @@ import { SearchGIFResponse, Gif } from '../interfaces/gifs.interface';
 export class GifsService {
 
   private _historial: string[] = [];
-  private api_key: string = environment.GIPHY_API_KEY;
 
   public resultodos: Gif[] = [];
 
@@ -35,13 +34,20 @@ export class GifsService {
 
   async buscarGif(query: string): Promise<any> {
 
-    this.http.get<SearchGIFResponse>(`https://api.giphy.com/v1/gifs/search?api_key=${this.api_key}&q=${query}&limit=25&offset=0&rating=G&lang=en`)
+    const params: HttpParams = new HttpParams()
+      .set('api_key', environment.GIPHY_API_KEY)
+      .set('q', query)
+      .set('limit', '10')
+      .set('rating', 'g')
+      .set('lang', 'es');
+
+    this.http.get<SearchGIFResponse>(`${environment.GIPHY_API_URL}/search?`,{params})
       .subscribe((response) => {
 
         this.resultodos = response.data;
 
         localStorage.setItem('resultados', JSON.stringify(this.resultodos));
-        
+
       });
 
     if (this.historial.includes(query.trim().toLowerCase())) {
@@ -53,7 +59,7 @@ export class GifsService {
     this._historial = this._historial.slice(0, 10);
 
     localStorage.setItem('historial', JSON.stringify(this._historial));
-   
+
 
   }
 
